@@ -3,14 +3,14 @@ import {MigrationInterface, QueryRunner, TableColumn, TableForeignKey} from "typ
 export default class AddProductIdToOrderProducts1604889177531 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.addColumn( 'order_products', 
+        await queryRunner.addColumn( 'orders_products', 
           new TableColumn({
               name: 'product_id',
               type: 'uuid',
               isNullable: true,
           })),
 
-          await queryRunner.createForeignKey('order_products', new TableForeignKey({
+          await queryRunner.createForeignKey('orders_products', new TableForeignKey({
               name: 'ordersProductsProducts',
               columnNames: ['product_id'],
               referencedColumnNames: ['id'],
@@ -21,8 +21,8 @@ export default class AddProductIdToOrderProducts1604889177531 implements Migrati
     }
   
       public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('order_products', 'ordersProductsProducts');
-        await queryRunner.dropColumn('order_products', 'product_id');
+        await queryRunner.dropForeignKey('orders_products', 'ordersProductsProducts');
+        await queryRunner.dropColumn('orders_products', 'product_id');
       }
 }
 
